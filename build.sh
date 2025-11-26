@@ -2,7 +2,7 @@
 
 WORKDIR=$(mktemp -dp .)
 
-# One parameter?
+# Parameter given?
 if [ -z "$1" ]; then
     echo "Error. Please provide name of minimal container to build."
     echo "Syntax: $0 <name>"
