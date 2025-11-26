@@ -22,6 +22,7 @@ There is a subdirectory for each minimal container image (thus far only one - mo
 - Then, based on the `BINARIES`, the needed libraries are (recursively) searched for and collected, including the dynamic loader library.
 - As an optional step (using `extra_steps.sh`), some additional files are collected (in case of mosquitto, `/etc/passwd` and `/etc/group` are copied, because otherwise mosquitto complains about a missing mosquitto user).
 - Finally, all collected files are copied into an empty (`scratch`) container and the entrypoint is set to `ENTRYPOINT_BIN`.
+- Once the image is created (docker automatically tags it as `:latest`), the `get_version.sh` script is executed and the output is used to add another tag with the correct version number.
 
 ## Docker Hub
 
