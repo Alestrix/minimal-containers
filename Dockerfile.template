@@ -1,0 +1,29 @@
+# -------- Stage 1: Builder / Dependency Collector ----------
+FROM debian:stable-slim AS builder
+
+ARG BINARIES="/usr/bin/ls"
+
+# Optionale zusätzliche Pakete, die VOR dem Sammeln der Executables installiert werden
+ARG EXTRA_PACKAGES=""
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    bash coreutils findutils file binutils libc6 $EXTRA_PACKAGES && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /build
+
+COPY --chmod=a+x collect.sh extra_steps.sh ./
+
+# Run dependency collection
+RUN ./collect.sh $BINARIES
+RUN ./extra_steps.sh
+
+# -------- Final Stage ----------
+FROM scratch
+
+COPY --from=builder /build/rootfs/ /
+
+ENV LD_LIBRARY_PATH=/lib/x86_64-linux-gnu
+
+# Image-specific Entrypoint
