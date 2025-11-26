@@ -10,11 +10,11 @@ There is a subdirectory for each minimal container image (thus far only one - mo
 
 | File | Purpose |
 | -- | -- |
-| EXTRA_PACKAGES | List of extra packages to install |
-| BINARIES | List of binaries to copy to final image |
-| ENTRYPOINT_BIN | The path configured as entrypoint in the image |
-| extra_steps.sh | Extra collection steps needed to make this container work |
-| get_version.sh | A script that outputs the version of the created container image |
+| `EXTRA_PACKAGES` | List of extra packages to install |
+| `BINARIES` | List of binaries to copy to final image |
+| `ENTRYPOINT_BIN` | The path configured as entrypoint in the image |
+| `extra_steps.sh` | Extra collection steps needed to make this container work |
+| `get_version.sh` | A script that outputs the version of the created container image |
 
 ## How the image is built
 
