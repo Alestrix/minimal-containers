@@ -1,9 +1,10 @@
 # -------- Stage 1: Builder / Dependency Collector ----------
 FROM debian:stable-slim AS builder
 
+# Just a place holder, should be overriden using --build-arg
 ARG BINARIES="/usr/bin/ls"
 
-# Optionale zusätzliche Pakete, die VOR dem Sammeln der Executables installiert werden
+# Extra packages to install - override using --build-arg
 ARG EXTRA_PACKAGES=""
 
 RUN apt-get update && \
