@@ -1,6 +1,6 @@
 # minimal-mosquitto
 
-## Files
+## Files you will need
 
 `mosquitto.conf`:
 ```
@@ -24,7 +24,7 @@ user:secretpassword
 ## Usage
 
 Hash passwords - this will assume `mqttpasswd` contains unencrypted passwords only. Already hashed passwords will be **re-hashed**!  
-`docker run --rm -v /tmp:/tmp -v ./mqttpasswd:/mqttpasswd:rw --entrypoint /usr/bin/mosquitto_passwd alestrix/minimal-mosquitto:v2.0.21 -U /mqttpasswd`
+`docker run --rm -v /tmp -v ./mqttpasswd:/mqttpasswd:rw --entrypoint /usr/bin/mosquitto_passwd alestrix/minimal-mosquitto:v2.0.21 -U /mqttpasswd`
 
 Start mosquitto  
 `docker run --rm -v ./mosquitto.conf:/mosquitto.conf:ro -v ./mqttpasswd:/mqttpasswd:ro alestrix/minimal-mosquitto:v2.0.21 -c /mosquitto.conf`
