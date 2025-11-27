@@ -33,3 +33,9 @@ Therefore, I encourage everyone to build their own images. You shouldn't trust a
 ## Caveats
 
 The created images might not be able to be properly scanned by tools like trivy, grype, or xray as they do not include any package information.
+
+## Todo
+
+- create minimal `/etc/passwd` / `/etc/group`
+- set GID/UID to 65534
+- hope it still works then
