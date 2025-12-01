@@ -4,7 +4,7 @@
 
 In its default run mode, `minimal-opensshd` only allows a user `user` to start an sftp session and authenticate via ssh key. The corresponding `authorized_keys` file with
 the public key needs to be mounted into to container at `/etc/ssh/authorized_keys/user` and the server will listen on TCP port 2222. Connections will be chrooted to the user's
-home directory `/home/user` and there's a directory `/home/user/data` that is writable for the user (you should mount whatever you want accessible within the user's home).
+home directory `/home/user` - you should mount whatever you want to make accessible there.
 
 If you want to allow a user sftp read-only access to `/mydata`, you can run
 
@@ -76,7 +76,8 @@ user:x:1000:1000::/home/user:/usr/sbin/nologin
 sshd:x:997:65534:sshd user:/run/sshd:/usr/sbin/nologin
 ```
 
-Since there is no `bash` present in this image (and since `PermitRootLogin` is set to no), the root user will not be able to log into this container.
+Since there is no `bash` present in this image (and since `PermitRootLogin` is set to no), the root user will not be able to log into this container, but
+`sshd` needs the entry to be there.
 
 ## How it works internally
 

@@ -25,9 +25,9 @@ docker logs -f sshd-container
 
 ### Host keys
 
-Every time a new container is created from the image, a new set of ssh host keys is created. The keys will survive a `docker stop sshd-container` and `docker start sshd-container`,
-but if the container is re-created from scratch (e.g. if you use docker compose and run `docker compose down` and `docker compose up -d`), then the host keys will change and
-clients will complain about changed keys.
+Every time a new container is created from the image, a new set of ssh host keys is created. The keys will survive a `docker stop sshd-container` (unless you ran
+the container with `--rm`) and `docker start sshd-container`, but if the container is re-created from scratch (e.g. if you use docker compose and run
+`docker compose down` and `docker compose up -d`), then the host keys will be recreated and clients will complain about changed keys.
 
 In order to keep the host keys constant you need to create them outside of the container and mount them into
 
