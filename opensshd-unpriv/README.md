@@ -102,4 +102,4 @@ docker run -p 23456:2222 --rm -v /home/realuser/.ssh/authorized_keys:/etc/ssh/au
 - Make startup binary smarter to allow parameters for username and UID/GID and update /etc/passwd before sshd is started
 - Test chroot
 - Try in kubernetes and add respective documentation
-~~- Somehow solve the issue of private `ssh_host_*_key`s being readable by user (as sshd runs under that same user!)~~ --> solved by privileged version `minimal-opensshd`.
+- ~~Somehow solve the issue of private `ssh_host_*_key`s being readable by user (as sshd runs under that same user!)~~ --> solved by privileged version `minimal-opensshd`.
