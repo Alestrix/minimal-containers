@@ -34,4 +34,4 @@ You might want to chmod and/or chown the files. See mosquitto output about what 
 ## Todo
 
 - Dont copy full `/etc/passwd` and `/etc/group`, but only the mosquitto user/group
-- Include default mosquitto.conf and mqttpasswd with some sane defaults
+- Include `mosquitto.conf` and `mqttpasswd` with some sane defaults
