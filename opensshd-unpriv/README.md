@@ -2,9 +2,11 @@
 
 This is a minimal OpenSSHd container that runs an SFTP server as non-root user.
 
-**NOTE:** Since the OpenSSHd server cannot switch between a privileged account (that has access to host keys) and the account that the user actions will be
-carried out as, the logged-in user has access to the server's private host keys. Only use this image if you control both sides of the connection and if it
-is okay that the user on client side may get access to the server's private ssh keys!
+## Caveats
+
+***NOTE:*** The OpenSSHd server cannot switch "down" from a privileged account (that has access to host keys) to the account that the user actions will be
+carried out as. Hence, the **logged-in user has full access to the server's private host keys**. Only use this image if you control both sides of the connection and
+if you know that the user on client will not mess with the server's private ssh keys!
 
 ## Out-of-the-box usage
 

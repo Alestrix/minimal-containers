@@ -30,3 +30,7 @@ Start mosquitto
 `docker run --rm -v ./mosquitto.conf:/mosquitto.conf:ro -v ./mqttpasswd:/mqttpasswd:ro alestrix/minimal-mosquitto:v2.0.21 -c /mosquitto.conf`
 
 You might want to chmod and/or chown the files. See mosquitto output about what to do.
+
+## Todo
+
+- Dont copy full `/etc/passwd` and `/etc/group`, but only the mosquitto user/group

@@ -6,15 +6,23 @@ This repo intents to provide a general way to create minimal docker containers. 
 
 ## How to use
 
-There is a subdirectory for each minimal container image (thus far only one - mosquitto). Each subdirectory includes these files:
+There is a subdirectory for each minimal container image. Each subdirectory includes these files:
 
 | File | Purpose |
 | -- | -- |
 | `EXTRA_PACKAGES` | List of extra packages to install |
 | `BINARIES` | List of binaries to copy to final image |
 | `ENTRYPOINT` | The line (or lines) used as ENTRYPOINT (and optionally CMD) for the Dockerfile |
-| `extra_steps.sh` | Extra collection steps needed to make this container work |
+| `extra_steps.sh` | Extra collection steps needed to make the respective container work |
 | `get_version.sh` | A script that outputs the version of the created container image |
+
+So far there are directories for these containers:
+
+| Directory | Purpose |
+| -- | -- |
+| [mosquitto](./mosquitto/README.md) | An MQTT server |
+| [opensshd](./opensshd/README.md) | The OpenSSH ssh server (sftp-only, key-only, chroot to user's home) |
+| [opensshd-unpriv](./opensshd-unpriv/README.md) | The OpenSSH ssh serer running unprivileged in userspace (beware of some [caveats](./opensshd-unpriv/README.md#caveats) ) |
 
 ## How the image is built
 
