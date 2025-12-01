@@ -23,14 +23,14 @@ cat > ./sshd-start.c <<'EOF'
 int main(int argc, char *argv[]) {
     glob_t g;
 
-    // 1. Hostkeys prüfen
+    // 1. Check for hostkey existance
     int r = glob("/etc/ssh/ssh_host_*_key", 0, NULL, &g);
 
     if (r == GLOB_NOMATCH || g.gl_pathc == 0) {
         printf("No SSH-Host-Keys found – generating...\n");
         globfree(&g);
 
-        // ssh-keygen -A ausführen
+        // exec ssh-keygen -A to generate hostkeys
         pid_t pid = fork();
         if (pid == 0) {
             execl("/usr/bin/ssh-keygen", "ssh-keygen", "-A", (char *)NULL);
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
             exit(1);
         }
 
-        // Auf ssh-keygen warten
+        // wait for ssh-keygen
         int status;
         waitpid(pid, &status, 0);
 
@@ -58,14 +58,14 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-    // 2. Startparameter anzeigen
+    // 2. Show parameters
     printf("Starting sshd with parameters:");
     for (int i = 1; i < argc; i++) {
         printf(" %s", argv[i]);
     }
     printf("\n");
 
-    // 3. Argumentliste für execv bauen
+    // 3. Build args (has one item more than argc)
     char **args = malloc((argc + 1) * sizeof(char*));
     if (!args) {
         perror("malloc");
@@ -77,10 +77,10 @@ int main(int argc, char *argv[]) {
         args[i] = argv[i];
     args[argc] = NULL;
 
-    // sshd starten (ersetzt aktuellen Prozess)
+    // start sshd replacing current process
     execv("/usr/sbin/sshd", args);
 
-    // nur bei Fehler:
+    // in case of error
     perror("execv sshd");
     return 1;
 }
