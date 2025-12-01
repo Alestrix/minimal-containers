@@ -23,7 +23,7 @@ user:secretpassword
 
 ## Usage
 
-Hash passwords - this will assume `mqttpasswd` contains unencrypted passwords only. Already hashed passwords will be **re-hashed**!  
+Hash passwords - this will assume `mqttpasswd` contains clear-text passwords only. Already hashed passwords will be **re-hashed**!  
 `docker run --rm -v /tmp -v ./mqttpasswd:/mqttpasswd:rw --entrypoint /usr/bin/mosquitto_passwd alestrix/minimal-mosquitto:v2.0.21 -U /mqttpasswd`
 
 Start mosquitto  
