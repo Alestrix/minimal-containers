@@ -25,6 +25,4 @@ FROM scratch
 
 COPY --from=builder /build/rootfs/ /
 
-ENV LD_LIBRARY_PATH=/lib/x86_64-linux-gnu
-
 # Image-specific Entrypoint
