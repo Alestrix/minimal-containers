@@ -69,10 +69,10 @@ Subsystem       sftp    /usr/lib/openssh/sftp-server
 Include /etc/ssh/sshd_config.d/*.conf
 ```
 
-If you want to add or override some settings, you can mount additional `*.conf` files into the container's `/etc/ssh/sshd_config.d/` directory. Plesae be aware that not
+If you want to add or override some settings, you can mount additional `*.conf` files into the container's `/etc/ssh/sshd_config.d/` directory. Please be aware that not
 all setting from sshd_config can be overridden in sshd_config.d/*.conf.
 
-If you want to change the user for the login to the container, you need to mount a different `/etc/passwd` into the container. The current one looks like this:
+If you want to change the user name for the login to the container, you need to mount a different `/etc/passwd` into the container. The current one looks like this:
 
 ```
 user:x:1000:1000::/home/user:/usr/lib/openssh/sftp-server
@@ -91,7 +91,7 @@ The entrypoint of the container is a little `sshd-start` binary compiled during 
 calls `ssh-keygen` to create them. Next, it starts `sshd` with the same options as the ones provided to itself (i.e. to the container during startup). By default,
 these are `-D -e`, i.e do not detatch from tty and output all messages, including errors, to stdout/stderr.
 
-If you want to try some settings and want to have more thorough debug output, you can try
+If you want to try some settings and want to have more thorough debug output, you can run
 
 ```
 docker run -p 23456:2222 --rm -v /home/realuser/.ssh/authorized_keys:/etc/ssh/authorized_keys/user -v ./sshd_extra.conf:/etc/ssh/sshd_config.d/extra.conf:ro minimal-opensshd-unpriv -dd
@@ -100,6 +100,6 @@ docker run -p 23456:2222 --rm -v /home/realuser/.ssh/authorized_keys:/etc/ssh/au
 ## Todo
 
 - Make startup binary smarter to allow parameters for username and UID/GID and update /etc/passwd before sshd is started
-- Test chroot
+- ~~Test chroot~~ --> solved by privileged version `minimal-opensshd`.
 - Try in kubernetes and add respective documentation
 - ~~Somehow solve the issue of private `ssh_host_*_key`s being readable by user (as sshd runs under that same user!)~~ --> solved by privileged version `minimal-opensshd`.
