@@ -22,7 +22,7 @@ So far there are directories for these containers:
 | -- | -- |
 | [mosquitto](./mosquitto/README.md) | An MQTT server |
 | [opensshd](./opensshd/README.md) | The OpenSSH ssh server (sftp-only, key-only, chroot to user's home) |
-| [opensshd-unpriv](./opensshd-unpriv/README.md) | The OpenSSH ssh serer running unprivileged in userspace (beware of some [caveats](./opensshd-unpriv/README.md#caveats) ) |
+| [opensshd-unpriv](./opensshd-unpriv/README.md) | Like opensshd, but running unprivileged (beware of some [caveats](./opensshd-unpriv/README.md#caveats) ) |
 
 ## How the image is built
 
