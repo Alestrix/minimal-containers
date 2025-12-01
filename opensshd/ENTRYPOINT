@@ -1,0 +1,4 @@
+USER 1000
+
+ENTRYPOINT ["/usr/sbin/sshd-start"]
+CMD ["-D", "-e"]
