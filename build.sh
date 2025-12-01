@@ -16,9 +16,9 @@ if [ ! -d "${CONTAINER}" ]; then
     exit 2
 fi
 
-cat Dockerfile.template - <<< "ENTRYPOINT [\"$(cat ${CONTAINER}/ENTRYPOINT_BIN)\"]" > ${WORKDIR}/Dockerfile
-cp collect.sh ${WORKDIR}
 cp ${CONTAINER}/* ${WORKDIR}
+cp collect.sh ${WORKDIR}
+cat Dockerfile.template ${WORKDIR}/ENTRYPOINT > ${WORKDIR}/Dockerfile
 
 docker build --no-cache \
   --build-arg EXTRA_PACKAGES="$(cat ${CONTAINER}/EXTRA_PACKAGES)" \
