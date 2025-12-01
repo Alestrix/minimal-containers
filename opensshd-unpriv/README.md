@@ -1,14 +1,20 @@
-# minimal-opensshd
+# Unprivileged minimal-opensshd
+
+This is a minimal OpenSSHd container that runs an SFTP server as non-root user.
+
+**NOTE:** Since the OpenSSHd server cannot switch between a privileged account (that has access to host keys) and the account that the user actions will be
+carried out as, the logged-in user has access to the server's private host keys. Only use this image if you control both sides of the connection and if it
+is okay that the user on client side may get access to the server's private ssh keys!
 
 ## Out-of-the-box usage
 
-In its default run mode, `minimal-opensshd` only allows a user `user` to start an sftp session and authenticate via ssh key. The corresponding `authorized_keys` file with
+In its default run mode, `minimal-opensshd-unpriv` only allows a user `user` to start an sftp session and authenticate via ssh key. The corresponding `authorized_keys` file with
 the public key needs to be mounted into to container at `/etc/ssh/authorized_keys/user` and the server will listen on TCP port 2222.
 
 So if you want to allow a user sftp read-only access to `/data`, you can run
 
 ```
-docker run -d -p 2222:2222 --name sshd-container -v /home/realuser/.ssh/authorized_keys:/etc/ssh/authorized_keys/user -v /data:/data:ro minimal-opensshd
+docker run -d -p 2222:2222 --name sshd-container -v /home/realuser/.ssh/authorized_keys:/etc/ssh/authorized_keys/user -v /data:/data:ro minimal-opensshd-unpriv
 
 docker logs -f sshd-container
 ```
@@ -63,7 +69,8 @@ Subsystem       sftp    /usr/lib/openssh/sftp-server
 Include /etc/ssh/sshd_config.d/*.conf
 ```
 
-If you want to add or override some settings, you can mount additional `*.conf` files into the container's `/etc/ssh/sshd_config.d/` directory.
+If you want to add or override some settings, you can mount additional `*.conf` files into the container's `/etc/ssh/sshd_config.d/` directory. Plesae be aware that not
+all setting from sshd_config can be overridden in sshd_config.d/*.conf.
 
 If you want to change the user for the login to the container, you need to mount a different `/etc/passwd` into the container. The current one looks like this:
 
@@ -87,7 +94,7 @@ these are `-D -e`, i.e do not detatch from tty and output all messages, includin
 If you want to try some settings and want to have more thorough debug output, you can try
 
 ```
-docker run -p 23456:2222 --rm -v /home/realuser/.ssh/authorized_keys:/etc/ssh/authorized_keys/user -v ./sshd_extra.conf:/etc/ssh/sshd_config.d/extra.conf:ro minimal-opensshd -dd
+docker run -p 23456:2222 --rm -v /home/realuser/.ssh/authorized_keys:/etc/ssh/authorized_keys/user -v ./sshd_extra.conf:/etc/ssh/sshd_config.d/extra.conf:ro minimal-opensshd-unpriv -dd
 ```
 
 ## Todo
@@ -95,4 +102,4 @@ docker run -p 23456:2222 --rm -v /home/realuser/.ssh/authorized_keys:/etc/ssh/au
 - Make startup binary smarter to allow parameters for username and UID/GID and update /etc/passwd before sshd is started
 - Test chroot
 - Try in kubernetes and add respective documentation
-- Somehow solve the issue of private `ssh_host_*_key`s being readable by user (as sshd runs under that same user!)
+~~- Somehow solve the issue of private `ssh_host_*_key`s being readable by user (as sshd runs under that same user!)~~ --> solved by privileged version `minimal-opensshd`.

@@ -1,1 +1,0 @@
-sshd ssh-keygen /usr/lib/openssh/sftp-server /usr/lib/openssh/sshd-session /usr/lib/openssh/ssh-session-cleanup /usr/lib/openssh/sshd-auth bash
