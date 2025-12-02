@@ -34,7 +34,9 @@ So far there are directories for these containers:
 
 ## Docker Hub
 
-While I do upload the image(s) to `alestrix/minimal-<container>`, I haven't set up a pipeline that keeps the image(s) updated and by the time you want to use it, I might have abandoned this whole idea and the image could be completely outdated and full of vulnerabilities.
+While I do upload the image(s) to `alestrix/minimal-<container>` ([link to docker hub](https://hub.docker.com/u/alestrix)), I haven't set up a pipeline that
+keeps the image(s) updated and by the time you want to use it, I might have abandoned this whole idea and the image could be completely outdated and full of
+vulnerabilities.
 
 Therefore, I encourage everyone to build their own images. You shouldn't trust a random guy on the internet anyway!
 
