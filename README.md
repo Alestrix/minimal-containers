@@ -27,8 +27,8 @@ So far there are directories for these containers:
 ## How the image is built
 
 - First, based on `debian:stable-slim` packages are updated to latest versions and `EXTRA_PACKAGES` (see table above) are installed.
-- Then, based on the `BINARIES`, the needed libraries are (recursively) searched for and collected, including the dynamic loader library.
-- As an optional step (using `extra_steps.sh`), some additional files are collected (in case of mosquitto, `/etc/passwd` and `/etc/group` are copied, because otherwise mosquitto complains about a missing mosquitto user).
+- Then, based on the `BINARIES`, the libraries needed for the respective executable are (recursively) searched for and collected, including the dynamic loader library.
+- As an optional step (using `extra_steps.sh`), some additional files are collected (in case of mosquitto, `/etc/passwd` and `/etc/group` are copied, because otherwise mosquitto complains about a missing mosquitto user) or created.
 - Finally, all collected files are copied into an empty (`scratch`) container and the entrypoint and cmd are set according to `ENTRYPOINT`.
 - Once the image is created (docker automatically tags it as `:latest`), the `get_version.sh` script is executed and the output is used to add another tag with the correct version number.
 
@@ -43,9 +43,3 @@ Therefore, I encourage everyone to build their own images. You shouldn't trust a
 ## Caveats
 
 The created images might not be able to be properly scanned by tools like trivy, grype, or xray as they do not include any package information.
-
-## Todo
-
-- create minimal `/etc/passwd` / `/etc/group`
-- set GID/UID to 65534
-- hope it still works then
