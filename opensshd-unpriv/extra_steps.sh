@@ -126,8 +126,7 @@ UseLogin no
 
 AcceptEnv LANG LC_* COLORTERM NO_COLOR
 
-#Subsystem       sftp    /usr/lib/openssh/sftp-server
-Subsystem       sftp    internal-server
+Subsystem       sftp    internal-sftp
 
 Include /etc/ssh/sshd_config.d/*.conf
 

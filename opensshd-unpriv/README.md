@@ -11,7 +11,7 @@ if you know that the user on client side will not mess with the server's private
 ## Out-of-the-box usage
 
 In its default run mode, `minimal-opensshd-unpriv` only allows a user `user` to start an sftp session and authenticate via ssh key. The corresponding `authorized_keys` file with
-the public key needs to be mounted into to container at `/etc/ssh/authorized_keys/user` and the server will listen on TCP port 2222.
+the public key needs to be mounted into the container at `/etc/ssh/authorized_keys/user` and the server will listen on TCP port 2222.
 
 So if you want to allow a user sftp read-only access to `/data`, you can run
 
@@ -66,7 +66,7 @@ UseLogin no
 
 AcceptEnv LANG LC_* COLORTERM NO_COLOR
 
-Subsystem       sftp    /usr/lib/openssh/sftp-server
+Subsystem       sftp    internal-sftp
 
 Include /etc/ssh/sshd_config.d/*.conf
 ```
