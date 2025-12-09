@@ -20,14 +20,19 @@ cp ${CONTAINER}/* ${WORKDIR}
 cp collect.sh ${WORKDIR}
 cat Dockerfile.template ${WORKDIR}/ENTRYPOINT > ${WORKDIR}/Dockerfile
 
-docker build --no-cache \
+docker build --progress=plain --no-cache \
   --build-arg EXTRA_PACKAGES="$(cat ${CONTAINER}/EXTRA_PACKAGES)" \
   --build-arg BINARIES="$(cat ${CONTAINER}/BINARIES)" \
-  -t minimal-${CONTAINER} ${WORKDIR}
+  -t alestrix/minimal-${CONTAINER} ${WORKDIR}
 
 sleep 1
 
-docker tag minimal-${CONTAINER}:latest minimal-${CONTAINER}:$(./${WORKDIR}/get_version.sh)
+IMAGENAME="alestrix/minimal-${CONTAINER}:latest"
+IMAGENAME_VER="alestrix/minimal-${CONTAINER}:$(./${WORKDIR}/get_version.sh)"
+
+docker tag ${IMAGENAME} ${IMAGENAME_VER}
+# docker push ${IMAGENAME}
+# docker push ${IMAGENAME_VER}
 
 # Cleanup
 if [[ "$WORKDIR" == ./tmp* ]]; then

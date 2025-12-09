@@ -19,6 +19,8 @@ COPY --chmod=a+x collect.sh extra_steps.sh ./
 # Run dependency collection
 RUN ./collect.sh $BINARIES
 RUN ./extra_steps.sh
+# Re-Run dependency collection
+RUN ./collect.sh $BINARIES
 
 # -------- Final Stage ----------
 FROM scratch
