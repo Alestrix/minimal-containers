@@ -23,7 +23,8 @@ So far there are directories for these containers:
 | [mosquitto](./mosquitto/README.md) | An MQTT server |
 | [opensshd](./opensshd/README.md) | The OpenSSH ssh server (sftp-only, key-only, chroot to user's home) |
 | [opensshd-unpriv](./opensshd-unpriv/README.md) | Like opensshd, but running unprivileged (beware of some [caveats](./opensshd-unpriv/README.md#caveats) ) |
-| [wsddn](./wsddn/README.md) | Web Service (or Web Socket?) Discovery Daemon native - C implememtaion of the WS-Discovery protocol to get rid of NetBIOS |
+| [wsddn](./wsddn/README.md) | Web Service (or Web Socket?) Discovery Daemon (native) - C++ implementation of |
+| | the WS-Discovery protocol to get rid of NetBIOS |
 
 ## How the image is built
 
