@@ -1,0 +1,4 @@
+USER 65532
+
+ENTRYPOINT ["/usr/local/bin/wsddn"]
+#CMD ["-D", "-e"]

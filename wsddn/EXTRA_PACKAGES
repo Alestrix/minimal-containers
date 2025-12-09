@@ -1,0 +1,1 @@
+build-essential cmake git pkg-config libc6-dev libstdc++-12-dev libgcc-s1 ca-certificates
